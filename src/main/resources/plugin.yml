@@ -1,0 +1,10 @@
+name: VanishPoof
+version: '${project.version}'
+main: net.labindustries.vanishpoof.VanishPoof
+api-version: 1.19
+authors: [ Lukas02 ]
+description: You got poof
+website: labindustries.net
+commands:
+  vanish:
+    description: "Vanishes a player"
