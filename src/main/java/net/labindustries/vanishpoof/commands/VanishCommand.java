@@ -29,6 +29,7 @@ public class VanishCommand implements CommandExecutor {
                     for (Player people : Bukkit.getOnlinePlayers()){
                         people.showPlayer(vanishPoof, player);
                     }
+                    vanishPoof.chat_revoke.remove(player);
                     vanishPoof.invisible_list.remove(player);
                     player.sendMessage("You are now visible to other players on the server.");
                     Bukkit.broadcastMessage(ChatColor.GRAY + player.getName() + fakeJoinMessage);
@@ -39,9 +40,13 @@ public class VanishCommand implements CommandExecutor {
                     String fakeQuitMessage = ChatColor.GRAY + " has disembarked!";
 
                     for (Player people : Bukkit.getOnlinePlayers()){
-                        people.hidePlayer(vanishPoof, player);
+                        if(!people.hasPermission("vanishpoof.always-visible")) {
+                            people.hidePlayer(vanishPoof, player);
+                        }
+
                     }
 
+                    vanishPoof.chat_revoke.add(player);
                     vanishPoof.invisible_list.add(player);
                     player.sendMessage("You are now invisible!");
                     Bukkit.broadcastMessage(ChatColor.GRAY + player.getName() + fakeQuitMessage);
